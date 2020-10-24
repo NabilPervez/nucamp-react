@@ -4,31 +4,31 @@ import { Link } from 'react-router-dom';
 
 function About(props) {
 
+    const partners = props.partners.map(partner => {
+        return (
+            <Media tag="li" key={partner.id}>
+                <RenderPartner partner={partner}/>
+            </Media>
+        );
+    });
+
     function RenderPartner({partner}){
         if(partner){
             return(
                 <React.Fragment>
-                    <Media object src={partner.image} alt={partner.name} width="150px"/>
-                    <Media body className="ml-5 mb-4">
-                        <Media heading> {partner.name} {partner.description} </Media>
-                    </Media>
+                    <Media object src={partner.image} alt={partner.name} width="150"/>
+                        <Media body className="ml-5 mb-4">
+                            <Media heading> {partner.name} </Media>
+                            {partner.description}
+                        </Media>
                 </React.Fragment>
-            )
+            );
         }       
         return(
             <div>
-
             </div>
-        )
-    }
-
-    const partners = props.partners.map(partner => {
-        return (
-            <media tag="li" key="partner.id">
-                <RenderPartner partner={partner}/>
-            </media>
         );
-    });
+    }
 
     return (
         <div className="container">
