@@ -49,6 +49,7 @@ class CommentForm extends React.Component{
                                     <Label htmlFor="rating">Rating</Label>
                                     <Control.select model=".rating" id="rating" name="rating"
                                         className="form-control">
+                                        <option>Please Select</option>
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -68,8 +69,7 @@ class CommentForm extends React.Component{
                                             minLength: minLength(2),
                                             maxLength: maxLength(15)
                                         }}
-                                        >
-                                    </Control.text>
+                                        />
                                     <Errors
                                         className="text-danger"
                                         model=".author"
@@ -83,12 +83,14 @@ class CommentForm extends React.Component{
                                     ></Errors>
                                     </FormGroup>
                                 </div>
+                                <div className="form-group">
                                     <FormGroup>
                                     <Label htmlFor="textarea">Comment</Label>
                                     <Control.textarea className="form-control" rows="10" model=".comment" id="comment" name="comment"
                                     >
                                     </Control.textarea>
                                     </FormGroup>
+                                </div>
                                 <Button color="primary">Submit</Button>               
                             </LocalForm>
                         </ModalBody>
