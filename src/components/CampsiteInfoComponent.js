@@ -90,7 +90,7 @@ class CommentForm extends React.Component{
                                 <div className="form-group">
                                     <FormGroup>
                                     <Label htmlFor="textarea">Comment</Label>
-                                    <Control.textarea className="form-control" rows="10" model=".comment" id="comment" name="comment"
+                                    <Control.textarea className="form-control" rows="10" model=".text" id="text" name="text"
                                     >
                                     </Control.textarea>
                                     </FormGroup>

@@ -8,7 +8,7 @@ import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import Contact from './ContactComponent';
 import About from './AboutComponent';
-import { postComment, addComment, fetchCampsites, fetchComments, fetchPromotions } from '../redux/ActionCreators';
+import { postComment, addComment, fetchCampsites, fetchComments, fetchPromotions, fetchPartners, addPartners, partnerLoading } from '../redux/ActionCreators'; //added partners
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { actions } from 'react-redux-form';
 
@@ -29,7 +29,9 @@ const mapDispatchToProps = {
     fetchCampsites: () => (fetchCampsites()),
     resetFeedbackForm: () => (actions.reset('feedbackForm')),
     fetchComments: () => (fetchComments()),
-    fetchPromotions: () => (fetchPromotions())
+    fetchPromotions: () => (fetchPromotions()),
+    //
+    fetchPartners: () => (fetchPartners())
 };
 
 
@@ -39,6 +41,8 @@ class Main extends Component {
         this.props.fetchCampsites();
         this.props.fetchComments();
         this.props.fetchPromotions();
+        //
+        this.props.fetchPartners();
     }
 
     render() {
@@ -52,12 +56,16 @@ class Main extends Component {
                     promotion={this.props.promotions.promotions.filter(promotion => promotion.featured)[0]}
                     promotionLoading={this.props.promotions.isLoading}
                     promotionErrMess={this.props.promotions.errMess}
-                    partner={this.props.partners.filter(partner => partner.featured)[0]}
+                    //
+                    partner={this.props.partners.partners.filter(partner => partner.featured)[0]}
+                    partnerLoading={this.props.partners.isLoading}
+                    partnerErrMess={this.props.partners.errMess}
                 />
             );
         }
 
         const CampsiteWithId = ({match}) => {
+            console.log(this.props);
             return (
                 <CampsiteInfo 
                     campsite={this.props.campsites.campsites.filter(campsite => campsite.id === +match.params.campsiteId)[0]}
