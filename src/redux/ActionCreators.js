@@ -138,22 +138,11 @@ export const fetchPartners = () => dispatch => {
         .then(partners => dispatch(addPartners(partners)));
 };
 
-export const postFeedback = feedback => {
-    
-    const newFeedback = {
-        firstName: feedback.firstName,
-        lastName: feedback.lastName,
-        phoneNum: feedback.phoneNum,
-        email: feedback.email,
-        agree: feedback.agree,
-        contactType: 'Phone',
-        feedback: feedback.feedback
-    };
-    newFeedback.date = new Date().toISOString();
+export const postFeedback = feedback => () => {
 
-    return fetch(baseUrl + 'comments', {
+    return fetch(baseUrl + 'feedback', {
             method: "POST",
-            body: JSON.stringify(newFeedback),
+            body: JSON.stringify(feedback),
             headers: {
                 "Content-Type": "application/json"
             }
@@ -170,7 +159,7 @@ export const postFeedback = feedback => {
             error => { throw error; }
         )
         .then(response => response.json())
-        .then(alert(`Thanks For Feedback + ${newFeedback}`))
+        .then(response => alert(`Thanks For Feedback + ${JSON.stringify(feedback)}`))
         .catch(error => {
             console.log('post comment', error.message);
             alert('Your comment could not be posted\nError: ' + error.message);

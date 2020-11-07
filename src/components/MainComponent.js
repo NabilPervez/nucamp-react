@@ -8,7 +8,7 @@ import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import Contact from './ContactComponent';
 import About from './AboutComponent';
-import { postComment, addComment, fetchCampsites, fetchComments, fetchPromotions, fetchPartners, addPartners, partnerLoading } from '../redux/ActionCreators'; //added partners
+import { postComment, addComment, fetchCampsites, fetchComments, fetchPromotions, fetchPartners, addPartners, partnerLoading, postFeedback } from '../redux/ActionCreators'; //added partners
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { actions } from 'react-redux-form';
 
@@ -31,7 +31,8 @@ const mapDispatchToProps = {
     fetchComments: () => (fetchComments()),
     fetchPromotions: () => (fetchPromotions()),
     //
-    fetchPartners: () => (fetchPartners())
+    fetchPartners: () => (fetchPartners()),
+    postFeedback: (feedback) => (postFeedback(feedback))
 };
 
 
@@ -87,7 +88,7 @@ class Main extends Component {
                                 <Route path='/home' component={HomePage} />
                                 <Route exact path='/directory' render={() => <Directory campsites={this.props.campsites} />} />
                                 <Route path='/directory/:campsiteId' component={CampsiteWithId} />
-                                <Route exact path='/contactus' render={() => <Contact resetFeedbackForm={this.props.resetFeedbackForm} /> } />
+                                <Route exact path='/contactus' render={() => <Contact resetFeedbackForm={this.props.resetFeedbackForm} postFeedback={this.props.postFeedback} /> } />
                                 <Route exact path='/aboutus' render={() => <About partners={this.props.partners} /> } />
                                 <Redirect to='/home' />
                             </Switch>
